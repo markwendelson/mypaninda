@@ -25,6 +25,7 @@ Route::put('/cart/update', [App\Http\Controllers\CartController::class, 'update'
 Route::delete('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 Route::delete('/cart/destroy', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/cart/promo', [App\Http\Controllers\CartController::class, 'promo'])->name('cart.promo');
+Route::post('/cart/featured', [App\Http\Controllers\CartController::class, 'featured'])->name('cart.featured');
 
 Route::name('page.')->prefix('pages')->group(function () {
     Route::get('/about', [App\Http\Controllers\PageController::class, 'about'])->name('about');
@@ -49,4 +50,3 @@ Route::middleware('auth')->group(function () {
     Route::get('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'upgrade'])->name('profiles.upgrade');
     Route::post('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'requestUpgrade'])->name('profiles.request-upgrade');    
 });
-
