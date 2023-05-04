@@ -21,14 +21,14 @@
                                         <!-- Tab panes -->
                                         <div class="tab-content">
                                             <div class="tab-pane fade show active" id="sg1" role="tabpanel">
-                                                @if (file_exists(env('APP_PRODUCTS_URL') . $product->image))
+                                            @if (str_contains(get_headers(env('APP_PRODUCTS_URL') . $product->image)[0], '200'))
                                                 <img src="{{ asset(env('APP_PRODUCTS_URL') . $product->image) }}" alt="{{ Str::title($product->title) }}" class="img-fluid">
-                                                @else
+                                            @else
                                                 <img src="{{ asset('img/noimage.png') }}" alt="{{ Str::title($product->title) }}" class="img-fluid">
-                                                @endif
+                                            @endif
                                             </div>
 
-                                            @if($product->image_2)
+                                            <!-- @if($product->image_2)
                                             <div class="tab-pane" id="sg2" role="tabpanel">
                                                 <img src="{{ asset(env('APP_PRODUCTS_URL') . $product->image_2) }}" alt="{{ Str::title($product->title) }}" class="img-fluid">
                                             </div>
@@ -38,9 +38,10 @@
                                             <div class="tab-pane" id="sg3" role="tabpanel">
                                                 <img src="{{ asset(env('APP_PRODUCTS_URL') . $product->image_3) }}" alt="{{ Str::title($product->title) }}" class="img-fluid">
                                             </div>
-                                            @endif
+                                            @endif -->
                                         </div>
-                                        <div class="nav d-flex justify-content-between">
+                                        
+                                        <!-- <div class="nav d-flex justify-content-between">
                                             <a class="nav-item nav-link active" data-toggle="tab" href="#sg1"><img src="{{ asset(env('APP_PRODUCTS_URL') . $product->image) }}" alt=""></a>
 
                                             @if($product->image_2)
@@ -50,7 +51,7 @@
                                             @if($product->image_3)
                                             <a class="nav-item nav-link" data-toggle="tab" href="#sg3"><img src="{{ asset(env('APP_PRODUCTS_URL') . $product->image_3) }}" alt=""></a>
                                             @endif
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
