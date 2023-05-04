@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
+use App\Models\FeaturedProduct;
 
 class CartController extends Controller
 {
@@ -181,5 +182,15 @@ class CartController extends Controller
 
         return redirect()->route('cart')
             ->with('message', 'The code you entered has been accepted.');
+    }
+
+    public function featured(Request $request)
+    {
+        $featured = FeaturedProduct::updateOrCreate(
+            ['product_id' => $request->product_id, 'user_id' => $request->user()->id],
+            ['status' => 1]
+        );
+
+        return $featured;
     }
 }
