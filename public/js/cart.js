@@ -115,7 +115,7 @@ $(document).ready(function() {
     $(document).on("click", ".btn-featured", function() {
         const id = $(this).attr("data-id");
 
-        const endpointUrl = baseUrl + "/seller/featured-products/create";
+        const endpointUrl = baseUrl + "/cart/featured";
 
         $.ajax({
             type: "POST",
@@ -125,7 +125,6 @@ $(document).ready(function() {
                 $('#featured-toast').toast('show');
             },
             error: function (err) {
-                // console.log(err.statusText);
                 $('#error-toast').toast('show');
             }
         });
