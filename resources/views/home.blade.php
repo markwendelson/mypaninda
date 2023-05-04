@@ -81,7 +81,7 @@
                         {{--
                         <span class="product-wishlist-btn btn-wishlist-add" data-id="{{ $item->id }}" title="Add to wishlist"><i data-feather="heart"></i></span>
                         --}}
-                        @if (file_exists(env('APP_PRODUCTS_URL') . $item->image))
+                        @if (str_contains(get_headers(env('APP_PRODUCTS_URL') . $item->image)[0], '200'))
                         <img src="{{ asset(env('APP_PRODUCTS_URL') . $item->image) }}" alt="{{ Str::title($item->title) }}">
                         @else
                         <img src="{{ asset('img/noimage.png') }}" alt="{{ Str::title($item->title) }}">
