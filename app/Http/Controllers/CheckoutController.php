@@ -167,6 +167,10 @@ class CheckoutController extends Controller
     public function complete(Request $request)
     {
         $order = Order::findOrFail($request->id);
+        if ($request->user()->id != $order->user_id) {
+            abort(404);
+        }
+
         return view('complete', compact('order'));
     }
 }
