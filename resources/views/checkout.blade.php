@@ -111,7 +111,7 @@
                             <div class="d-sm-flex justify-content-between mb-4 pb-4 border-bottom">
                                 <div class="media d-block d-sm-flex text-center text-sm-left">
                                     <a class="cart-item-thumb mx-auto mr-sm-4" href="#">
-                                    @if (file_exists(env('APP_PRODUCTS_URL') . $item['item']['image']))
+                                    @if (str_contains(get_headers(env('APP_PRODUCTS_URL') . $item['item']['image'])[0], '200'))
                                         <img src="{{ asset(env('APP_PRODUCTS_URL') . $item['item']['image']) }}" alt="{{ Str::title($item['item']['itle']) }}">
                                     @else
                                         <img src="{{ asset('img/noimage.png') }}" alt="{{ Str::title($item['item']['title']) }}">
