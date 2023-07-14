@@ -85,7 +85,7 @@
                                 {{ $product->description }}
                                 </div>
 
-                                <h2 class="h6">Similar Products</h2>
+                                <h2 class="h6">Recommendations</h2>
                                 <div class="row col-md-12">
                                     @foreach ($similarProducts as $item)
                                     <div class="col-md-3 col-sm-6">
