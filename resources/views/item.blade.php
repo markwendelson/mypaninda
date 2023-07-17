@@ -87,7 +87,7 @@
 
                                 <h2 class="h6">Recommendations</h2>
                                 <div class="row col-md-12">
-                                    @foreach ($similarProducts as $item)
+                                    @foreach ($recommendations as $item)
                                     <div class="col-md-3 col-sm-6">
                                         <div class="product-card mb-4">
                                             <div class="product-thumb">

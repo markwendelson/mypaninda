@@ -21,8 +21,8 @@ class ShopController extends Controller
     public function item($id)
     {
         $product = Product::findOrFail($id);
-        $similarProducts = Product::inRandomOrder()->limit(4)->get();
+        $recommendations = Product::inRandomOrder()->limit(12)->get();
 
-        return view('item', compact('product', 'similarProducts'));
+        return view('item', compact('product', 'recommendations'));
     }
 }
