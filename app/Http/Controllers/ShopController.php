@@ -25,4 +25,16 @@ class ShopController extends Controller
 
         return view('item', compact('product', 'recommendations'));
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->query('q');
+        $products = Product::where('title', 'LIKE', '%'.$search.'%')
+            ->orWhere('brand', 'LIKE', '%'.$search.'%')
+            ->oldest()
+            ->paginate(16)
+            ->appends('q', $search);
+
+        return view('search', compact('search', 'products'));
+    }
 }

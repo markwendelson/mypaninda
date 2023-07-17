@@ -18,6 +18,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Auth::routes();
 
 Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop');
+Route::get('/search', [App\Http\Controllers\ShopController::class, 'search'])->name('search');
 Route::get('/item/{id}', [App\Http\Controllers\ShopController::class, 'item'])->name('item');
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'store'])->name('cart.add');

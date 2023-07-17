@@ -46,10 +46,13 @@
         </div>
         <!-- search-box-->
         <div class="flex-grow-1 pb-3 pt-sm-3 my-1 px-sm-2 pr-lg-4 order-sm-2">
+        <form id="search-form" action="{{ route('search') }}" method="GET">
             <div class="input-group flex-nowrap">
-            <div class="input-group-prepend"><span class="input-group-text rounded-left" id="search-icon"><i data-feather="search"></i></span></div>
-            <input class="form-control rounded-right" type="text" id="site-search" placeholder="MyPaninda Search..." aria-label="search" aria-describedby="search-icon">
+                <div class="input-group-prepend"><span class="input-group-text rounded-left" id="search-icon"><i data-feather="search"></i></span></div>
+                <input class="form-control rounded-right" type="text" name="q" placeholder="MyPaninda Search..." 
+                    aria-label="search" aria-describedby="search-icon">
             </div>
+        </form>
         </div>
     </div>
 </header>
