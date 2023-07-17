@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
                 <li class="mt-n1 mr-1"><i data-feather="home"></i></li>
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">{{ Str::title($product->title) }}</a></li>
+                <li class="breadcrumb-item"><a href="#">Item</a></li>
             </ol>
             </nav>
             <h1 class="page-title">{{ Str::title($product->title) }}</h1><span class="d-block mt-2 text-muted"></span>
@@ -59,8 +59,9 @@
                                     <div class="sg-content">
                                         <div class="pro-tag">
                                             <ul class="list-unstyled list-inline">
-                                                <li class="list-inline-item"><a href="">{{ $product->category->collection->name }} ,</a></li>
-                                                <li class="list-inline-item"><a href="">{{ $product->category->name }}</a></li>
+                                                <li class="list-inline-item"><a href="">{{ $product->category->collection->name }},</a></li>
+                                                <li class="list-inline-item"><a href="">{{ $product->category->name }},</a></li>
+                                                <li class="list-inline-item"><a href="{{ route('search', ['q' => $product->brand]) }}">{{ $product->brand }}</a></li>
                                             </ul>
                                         </div>
                                             <div class="pro-name">
@@ -68,10 +69,12 @@
                                             </div>
                                             <div class="pro-price">
                                                 <ul class="list-unstyled list-inline">
-                                                    <li class="list-inline-item">Php {{ number_format($product->price, 2) }}</li>
+                                                    <li class="list-inline-item">Price: <i>Php {{ number_format($product->price, 2) }}</i></li>
                                                     <li class="list-inline-item"></li>
                                                 </ul>
-                                                <p>Shipping Fee : <span>Php {{ number_format($product->shipping_fee, 2) }}</span></p>
+                                                <p>Shipping Fee : <span><i>Php {{ number_format($product->shipping_fee, 2) }}</span></i></p>
+                                                <p>Condition : <span><i>{{ Str::title($product->condition) }}</span></i></p>
+                                                <p>Stocks : <span><i>{{ $product->stocks }}</span></i></p>
                                             </div>
                                             <div class="colo-siz">
                                                 <div class="pro-btns">
