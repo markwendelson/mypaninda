@@ -17,6 +17,7 @@
             <div class="form-group">
                 <label for="sponsor-id">Sponsor*</label>
                 <select id="sponsor-id" name="sponsor_id" class="form-control">
+                <option value="0">--- NO SPONSOR ---</option>
                     @foreach ($sponsors as $sponsor)
                     <option value="{{ $sponsor->id }}"{{ ($sponsor->id == old('sponsor_id')) ? ' selected' : '' }}>
                         {{ Str::title($sponsor->name) }} - ({{ $sponsor->username}})
