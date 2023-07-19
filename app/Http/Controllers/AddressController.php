@@ -12,9 +12,10 @@ class AddressController extends Controller
 {
     public function index()
     {
-        $address = Address::where('user_id', Auth::id())->first();
+        $addresses = Address::where('user_id', Auth::id())->get();
+        $address = Address::where('user_id', Auth::id())->where('is_default', 1)->first();
 
-        return view('profile.address', compact('address'));
+        return view('profile.address', compact('addresses', 'address'));
     }
 
     public function store(AddressRequest $request)

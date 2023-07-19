@@ -5,7 +5,35 @@
 
 <div class="container pb-5 mb-4">
     @include('partials.message')
-    
+
+    <div class="table-responsive font-size-sm">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Province</th>
+                    <th>City</th>
+                    <th>Default</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($addresses as $address)
+                <tr>
+                    <td><a href="{{ route('addresses.index') }}">{{ $address->first_name .' ' .$address->last_name }}</a></td>
+                    <td>{{ $address->email }}</td>
+                    <td>{{ $address->phone }}</td>
+                    <td>{{ $address->province }}</td>
+                    <td>{{ $address->city }}</td>
+                    <td>{{ ($address->is_default == 1 ? 'Yes' : 'No') }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <br><hr><br>
     <form class="row" action="{{ route('addresses.store') }}" method="POST">
         @csrf
         <div class="col-md-6">
@@ -71,7 +99,7 @@
 
         <div class="col-12">
             <hr class="mt-2 mb-3">
-            <button class="btn btn-primary" type="submit">Update Shipping Address</button>
+            <button class="btn btn-primary" type="submit">Update Default Shipping Address</button>
         </div>
     </form>
 </div>
