@@ -88,7 +88,7 @@ class CheckoutController extends Controller
         $currentUrl = url()->current();
         $domain = '.'.env('APP_DOMAIN');
         $username = Str::between($currentUrl, '://', $domain);
-        $affiliate = User::where('username', $username)->select('id')->first();
+        $affiliate = User::where('username', $username)->where('type', 'seller')->select('id')->first();
         $affiliateId = $affiliate->id ?? 0;
 
         // iterate cart items
