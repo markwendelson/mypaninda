@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\FeaturedProduct;
+use App\Models\Coupon;
 
 class CartController extends Controller
 {
