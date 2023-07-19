@@ -86,7 +86,7 @@ class CheckoutController extends Controller
         $order->save();
 
         $currentUrl = url()->current();
-		$domain = '.'.env('APP_DOMAIN');
+        $domain = '.'.env('APP_DOMAIN');
         $username = Str::between($currentUrl, '://', $domain);
         $affiliate = User::where('username', $username)->select('id')->first();
         $affiliateId = $affiliate->id ?? 0;

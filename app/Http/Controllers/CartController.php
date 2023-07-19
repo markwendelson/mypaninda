@@ -156,29 +156,17 @@ class CartController extends Controller
 
     public function promo(Request $request)
     {
-        // check sa database if meron and valid
-        // $coupon = Coupon::where('code', $request->coupon)
-        //             ->where('status', 1)
-        //             ->first();
+        $coupon = Coupon::where('code', strlower($request->coupon))
+                    ->where('status', 1)
+                    ->first();
 
-        // if (!$coupon) {
-        //     return redirect()->back()->withInput()
-        //         ->withErrors(['Unable to process request. Promocode is invalid.']);
-        // }
-        
-        // $request->session()->put('coupon', $coupon->code);
-        // $request->session()->put('discount', $coupon->discount ?? 0);
-
-        // demo only
-        $code = $request->coupon;
-        if ($code != 'MYPANINDA') {
+        if (!$coupon) {
             return redirect()->back()->withInput()
-                ->withErrors(['Unable to process request. Promocode is invalid.']);
+                ->withErrors(['Unable to process request. Code is invalid.']);
         }
-
-        $discount = 100;
-        $request->session()->put('coupon', $code);
-        $request->session()->put('discount', $discount);
+        
+        $request->session()->put('coupon', $coupon->code);
+        $request->session()->put('discount', $coupon->discount ?? 0);
 
         return redirect()->route('cart')
             ->with('message', 'The code you entered has been accepted.');
