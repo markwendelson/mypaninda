@@ -13,23 +13,24 @@ use App\Models\ShippingAddress;
 use App\Models\Settings;
 use App\Models\Seller;
 use App\Models\User;
+use App\Models\Product;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
-        $address = Address::where('user_id', Auth::id())->where('is_default', 1)->first();
-
         $cart = session('cart', []);
+        $DBProducts = Product::find(array_keys($cart))->keyBy('id');
 
         // use collections here; temp loop
         $subtotal = 0;
         $totalSF = 0;
         $discount = session('discount', 0);
 
-        foreach ($cart as $item) {
+        foreach ($cart as $id => $item) {
             $subtotal += $item['item']['price'] * $item['quantity'];
             $totalSF += $item['item']['shipping_fee'] * $item['quantity'];
+            $cart[$id]['stocks'] = $DBProducts[$id]['stocks'] ?? 0;
         }
 
         $total = ($subtotal + $totalSF) - $discount;
@@ -40,12 +41,14 @@ class CheckoutController extends Controller
             'totalSF' => number_format($totalSF, 2),
             'discount' => number_format($discount, 2),
             'total' => number_format($total, 2),
-            'address' => $address
+            'address' => Address::where('user_id', Auth::id())->where('is_default', 1)->first(),
         ]);
     }
 
     public function process(Request $request)
     {
+        // add ProductQuantityRule for validation
+        // proceed only when stocks are clear
         // get cart session
         $cart = $request->session()->get('cart', []);
         if (count($cart) <= 0) {

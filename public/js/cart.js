@@ -21,7 +21,6 @@ $(document).ready(function() {
                 $('#cart-add-toast').toast('show');
             },
             error: function (err) {
-                // console.log(err.statusText);
                 $('#error-toast').toast('show');
             }
         });
@@ -38,6 +37,10 @@ $(document).ready(function() {
             url: endpointUrl,
             data: { id, quantity },
             success: function(response) {
+                if (response.status != 'success') {
+                    return $('#cart-quantity-error-toast').toast('show');
+                }
+
                 // update total
                 $('#cart-update-toast').toast('show');
                 $('#cart-count').text((Object.keys(response.cart).length));
@@ -49,7 +52,6 @@ $(document).ready(function() {
                 $('#cart-total').text("Php " + response.total);
             },
             error: function (err) {
-                // console.log(err.statusText);
                 $('#error-toast').toast('show');
             }
         });
@@ -79,7 +81,6 @@ $(document).ready(function() {
                 $('#cart-total').text("Php " + response.total);
             },
             error: function (err) {
-                // console.log(err.statusText);
                 $('#error-toast').toast('show');
             }
         });
@@ -98,7 +99,6 @@ $(document).ready(function() {
                 $('#cart-toast').toast('show');
             },
             error: function (err) {
-                // console.log(err.statusText);
                 $('#error-toast').toast('show');
             }
         });

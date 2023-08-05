@@ -13,15 +13,17 @@ class CartController extends Controller
     public function index()
     {
         $cart = session('cart', []);
+        $DBProducts = Product::find(array_keys($cart))->keyBy('id');
 
         // use collections here; temp loop
         $subtotal = 0;
         $totalSF = 0;
         $discount = session('discount', 0);
 
-        foreach ($cart as $item) {
+        foreach ($cart as $id => $item) {
             $subtotal += $item['item']['price'] * $item['quantity'];
             $totalSF += $item['item']['shipping_fee'] * $item['quantity'];
+            $cart[$id]['stocks'] = $DBProducts[$id]['stocks'] ?? 0;
         }
 
         $total = ($subtotal + $totalSF) - $discount;
@@ -50,7 +52,7 @@ class CartController extends Controller
             if (isset($cart[$id])) {
                 $cart[$id]['quantity']++;
             } else {
-            // if item not exist in cart then add to cart with quantity = 1
+            // add to cart with quantity = 1
                 $cart[$id] = [
                     'item' => $product,
                     'quantity' => 1,
@@ -58,8 +60,8 @@ class CartController extends Controller
             }
 
             $request->session()->put('cart', $cart);
-        } else {
-            // cart empty add first item
+        } else { 
+            // cart is empty add first item
             $item = [
                 $id => [
                     'item' => $product,
@@ -79,6 +81,14 @@ class CartController extends Controller
     public function update(Request $request)
     {
         if ($request->id && $request->quantity) {
+            $DBProduct = Product::findOrFail($request->id);
+            if ($DBProduct->stocks < $request->quantity) {
+                return response()->json([
+                    'message' => 'Sorry, we are running out of the remaining product in our stocks.',
+                    'status' => 'error',
+                ]);
+            }
+
             $cart = $request->session()->get('cart');
             $cart[$request->id]['quantity'] = $request->quantity;
             $request->session()->put('cart', $cart);
@@ -99,7 +109,8 @@ class CartController extends Controller
             $total = ($subtotal + $totalSF) - $discount;
 
             return response()->json([
-                'message' => 'Cart updated successfully!', 
+                'message' => 'Cart updated successfully!',
+                'status' => 'success',
                 'cart' => $updatedCart,
                 'subtotal' => number_format($subtotal, 2),
                 'totalSF' => number_format($totalSF, 2),
@@ -160,7 +171,7 @@ class CartController extends Controller
 
     public function promo(Request $request)
     {
-        $coupon = Coupon::where('code', strlower($request->coupon))
+        $coupon = Coupon::where('code', strtolower($request->coupon))
                     ->where('status', 1)
                     ->first();
 

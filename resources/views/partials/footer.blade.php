@@ -135,7 +135,7 @@
     </div>
 </div>
 
-<!-- Toast update notification -->
+<!-- Toast update cart notification -->
 <div class="toast-container toast-top-right">
     <div class="toast mb-3" id="cart-update-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-success text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Cart item updated!</span>
@@ -145,7 +145,7 @@
     </div>
 </div>
 
-<!-- Toast remove notification -->
+<!-- Toast remove cart notification -->
 <div class="toast-container toast-top-right">
     <div class="toast mb-3" id="cart-remove-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-danger text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Cart item deleted!</span>
@@ -155,7 +155,17 @@
     </div>
 </div>
 
-<!-- Toast wishlist notification -->
+<!-- Toast cart quantity error notification -->
+<div class="toast-container toast-top-right">
+    <div class="toast mb-3" id="cart-quantity-error-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Unexpected Error!</span>
+            <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="toast-body">Sorry, we are running out of the remaining product in our stocks.</div>
+    </div>
+</div>
+
+<!-- Toast add wishlist notification -->
 <div class="toast-container toast-top-right">
     <div class="toast mb-3" id="wishlist-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-primary text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Added to wishlist!</span>
@@ -165,17 +175,7 @@
     </div>
 </div>
 
-<!-- Toast remove notification -->
-<div class="toast-container toast-top-right">
-    <div class="toast mb-3" id="error-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-danger text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Unexpected Error!</span>
-            <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="toast-body">An error occured while processing your request. Please try again later.</div>
-    </div>
-</div>
-
-<!-- Toast featured notification -->
+<!-- Toast add featured notification -->
 <div class="toast-container toast-top-right">
     <div class="toast mb-3" id="featured-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-primary text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Added to featured!</span>
@@ -185,12 +185,22 @@
     </div>
 </div>
 
-<!-- Toast featured remove notification -->
+<!-- Toast remove featured notification -->
 <div class="toast-container toast-top-right">
     <div class="toast mb-3" id="featured-remove-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-primary text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Remove to featured!</span>
             <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="toast-body">This item was remove to featured.</div>
+    </div>
+</div>
+
+<!-- Toast standard error notification -->
+<div class="toast-container toast-top-right">
+    <div class="toast mb-3" id="error-toast" data-delay="3000" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-danger text-white"><i class="mr-2" data-feather="check-circle" style="width: 1.25rem; height: 1.25rem;"></i><span class="font-weight-semibold mr-auto">Unexpected Error!</span>
+            <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="toast-body">An error occured while processing your request. Please try again later.</div>
     </div>
 </div>

@@ -13,8 +13,8 @@ class ShopController extends Controller
         $categoryId = $request->query('category');
         $category = Category::findOrFail($categoryId);
         $products = Product::where('category_id', $categoryId)
-                    ->where('stocks', '>', 0)->where('status', 1)
-                    ->paginate(16)->appends('category', $categoryId);
+                ->where('stocks', '>', 0)->where('status', 1)
+                ->paginate(16)->appends('category', $categoryId);
 
         return view('shop', compact('category', 'products'));
     }

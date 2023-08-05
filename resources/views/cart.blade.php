@@ -21,7 +21,7 @@
             @include('partials.message')
             <div class="row">
                 <div class="col-xl-9 col-md-8">
-                    <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary"><span>Products</span><a class="font-size-sm" href="{{ route('checkout') }}"><i data-feather="chevron-left" style="width: 1rem; height: 1rem;"></i>Continue shopping</a></h2>
+                    <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary"><span>Products</span><a class="font-size-sm" href="{{ route('home') }}"><i data-feather="chevron-left" style="width: 1rem; height: 1rem;"></i>Continue shopping</a></h2>
                     <!-- Item-->
                     @foreach ($cart as $id => $item)
                         <div id="item-{{ $id }}" class="d-sm-flex justify-content-between my-4 pb-4 border-bottom">
@@ -37,6 +37,7 @@
                                     <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="#">{{ $item['item']['title'] }}</a></h3>
                                     <div class="font-size-sm"><span class="text-muted mr-2">Price:</span>{{ number_format($item['item']['price'], 2) }}</div>
                                     <div class="font-size-sm"><span class="text-muted mr-2">Shipping Fee:</span>{{ number_format($item['item']['shipping_fee'], 2) }}</div>
+                                    <div class="font-size-sm"><span class="text-muted mr-2">Remaining Stocks:</span>{{ $item['stocks'] }}</div>
                                     <div class="font-size-lg text-primary pt-2" id="item-{{ $id }}-total">Php {{ number_format(($item['item']['price'] + $item['item']['shipping_fee']) * $item['quantity'] , 2) }}</div>
                                 </div>
                             </div>
