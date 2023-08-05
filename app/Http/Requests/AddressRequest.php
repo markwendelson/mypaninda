@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AddressRequest extends FormRequest
 {
@@ -32,6 +33,7 @@ class AddressRequest extends FormRequest
             'province' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'postal_code' => 'required|string|max:255',
+            'is_default' => ['required', Rule::in([1, 0]), 'sometimes'],
         ];
     }
 }

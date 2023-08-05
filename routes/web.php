@@ -42,12 +42,19 @@ Route::middleware('auth')->group(function () {
     Route::post('orders/cancel/{id}', [App\Http\Controllers\OrderController::class, 'cancel'])->name('orders.cancel');
     Route::get('orders/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
     // // Route::resource('wishlists', 'App\Http\Controllers\WishlistController::class');
+    
     Route::get('profiles/address', [App\Http\Controllers\AddressController::class, 'index'])->name('addresses.index');
     Route::post('profiles/address', [App\Http\Controllers\AddressController::class, 'store'])->name('addresses.store');
+    Route::get('profiles/address/{id}', [App\Http\Controllers\AddressController::class, 'show'])->name('addresses.show');
+    Route::put('profiles/address', [App\Http\Controllers\AddressController::class, 'update'])->name('addresses.update');
+    Route::delete('profiles/address', [App\Http\Controllers\AddressController::class, 'destroy'])->name('addresses.destroy');
+    
     Route::get('profiles', [App\Http\Controllers\ProfileController::class, 'index'])->name('profiles.index');
     Route::post('profiles', [App\Http\Controllers\ProfileController::class, 'update'])->name('profiles.update');
+    
     Route::get('profiles/password', [App\Http\Controllers\ProfileController::class, 'password'])->name('profiles.password');
     Route::post('profiles/password', [App\Http\Controllers\ProfileController::class, 'reset'])->name('profiles.reset');
+    
     Route::get('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'upgrade'])->name('profiles.upgrade');
     Route::post('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'requestUpgrade'])->name('profiles.request-upgrade');    
 });

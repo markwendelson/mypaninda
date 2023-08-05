@@ -21,7 +21,7 @@
             <tbody>
             @foreach($addresses as $address)
                 <tr>
-                    <td><a href="{{ route('addresses.index') }}">{{ $address->first_name .' ' .$address->last_name }}</a></td>
+                    <td><a href="{{ route('addresses.show', [$address]) }}">{{ $address->first_name .' ' .$address->last_name }}</a></td>
                     <td>{{ $address->email }}</td>
                     <td>{{ $address->phone }}</td>
                     <td>{{ $address->province }}</td>
@@ -39,67 +39,67 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="first-name">First Name *</label>
-                <input type="text" class="form-control" id="first-name" name="first_name" value="{{ old('first_name', $address->first_name ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="first-name" name="first_name" value="{{ old('first_name') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="last-name">Last Name *</label>
-                <input type="text" class="form-control" id="last-name" name="last_name" value="{{ old('last_name', $address->last_name ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="last-name" name="last_name" value="{{ old('last_name') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="email">Email Address *</label>
-                <input type="text" class="form-control" id="email" name="email" value="{{ old('email', $address->email ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="phone">Phone *</label>
-                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', $address->phone ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="address-line1">Address Line1 *</label>
-                <input type="text" class="form-control" id="address-line1" name="address_line1" value="{{ old('address_line1', $address->address_line1 ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="address-line1" name="address_line1" value="{{ old('address_line1') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="address-line2">Address Line2</label>
-                <input type="text" class="form-control" id="address-line2" name="address_line2" value="{{ old('address_line2', $address->address_line2 ?? '') }}" maxlength="255">
+                <input type="text" class="form-control" id="address-line2" name="address_line2" value="{{ old('address_line2') }}" maxlength="255">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="province">Province *</label>
-                <input type="text" class="form-control" id="province" name="province" value="{{ old('province', $address->province ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="province" name="province" value="{{ old('province') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="city">City *</label>
-                <input type="text" class="form-control" id="city" name="city" value="{{ old('city', $address->city ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="postal-code">Postal *</label>
-                <input type="text" class="form-control" id="postal-code" name="postal_code" value="{{ old('postal_code', $address->postal_code ?? '') }}" maxlength="255" required>
+                <input type="text" class="form-control" id="postal-code" name="postal_code" value="{{ old('postal_code') }}" maxlength="255" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="landmark">Landmark</label>
-                <input type="text" class="form-control" id="landmark" name="landmark" value="{{ old('landmark', $address->landmark ?? '') }}" maxlength="255">
+                <input type="text" class="form-control" id="landmark" name="landmark" value="{{ old('landmark') }}" maxlength="255">
             </div>
         </div>
 
         <div class="col-12">
             <hr class="mt-2 mb-3">
-            <button class="btn btn-primary" type="submit">Update Default Shipping Address</button>
+            <button class="btn btn-primary" type="submit">Create New Shipping Address</button>
         </div>
     </form>
 </div>

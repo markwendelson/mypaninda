@@ -18,7 +18,7 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $address = Address::where('user_id', Auth::id())->first();
+        $address = Address::where('user_id', Auth::id())->where('is_default', 1)->first();
 
         $cart = session('cart', []);
 
