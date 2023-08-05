@@ -78,9 +78,6 @@
                 <div class="product-card mb-4">
                     <div class="product-thumb">
                         <a class="product-thumb-link" href="{{ route('item', $item->id) }}"></a>
-                        {{--
-                        <span class="product-wishlist-btn btn-wishlist-add" data-id="{{ $item->id }}" title="Add to wishlist"><i data-feather="heart"></i></span>
-                        --}}
                         @if (str_contains(get_headers(env('APP_PRODUCTS_URL') . $item->image)[0], '200'))
                         <img src="{{ asset(env('APP_PRODUCTS_URL') . $item->image) }}" alt="{{ Str::title($item->title) }}">
                         @else

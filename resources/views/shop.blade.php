@@ -24,7 +24,6 @@
                     <div class="product-thumb">
 						<a class="product-thumb-link" href="{{ route('item', [$item]) }}"></a>
                         @auth
-                        <span class="product-wishlist-btn btn-wishlist-add" data-id="{{ $item->id }}" title="Add to wishlist"><i data-feather="heart"></i></span>
                         @if(auth()->user()->type == 'seller')
                         <span class="product-wishlist-btn btn-featured" data-id="{{ $item->id }}" title="Add to feature"><i data-feather="star"></i></span>
                         @endif
