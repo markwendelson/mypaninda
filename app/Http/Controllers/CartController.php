@@ -37,7 +37,10 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $product = Product::findOrFail($request->id);
+        $product = Product::where('id', $request->id)
+                    ->where('stocks', '>', 0)
+                    ->where('status', 1)
+                    ->firstOrFail();
         $id = $product->id;
 
         $cart = $request->session()->get('cart');
