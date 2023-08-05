@@ -64,7 +64,7 @@
                     <hr>
                     <a class="btn btn-primary btn-block" href="{{ route('checkout') }}"><i class="mr-2" data-feather="credit-card"></i>Proceed to Checkout</a>
 
-                    @if ($showCoupon == 0)
+                    @if ($showCoupon == 1)
                     <div class="pt-4">
                         <div class="accordion" id="cart-accordion">
                             <div class="card">

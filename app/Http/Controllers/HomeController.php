@@ -20,14 +20,14 @@ class HomeController extends Controller
     {
         $currentUrl = url()->current();
         $username = Str::between($currentUrl, '://', '.'.env('APP_DOMAIN'));
-        $seller = User::where('username', $username)->select('id')->first();
+        $user = User::where('username', $username)->where('type', 'seller')->select('id')->first();
 
         $limit = 12;
         $featuredProducts = Product::where('stocks', '>', 0)->where('status', 1)
                             ->inRandomOrder()->limit($limit)->get();
 
-        if ($seller) {
-            $featured = FeaturedProduct::where('user_id', $seller->id)->get();
+        if ($user) {
+            $featured = FeaturedProduct::where('user_id', $user->id)->get();
             if (count($featured) > 0) {
                 $ids = $featured->pluck('product_id');
                 $featuredProducts = Product::whereIn('id', $ids)

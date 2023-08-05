@@ -36,7 +36,8 @@ class AppServiceProvider extends ServiceProvider
         $currentUrl = url()->current();
         $domain = '.'.env('APP_DOMAIN');
         $username = Str::between($currentUrl, '://', $domain);
-        $user = User::where('username', $username)->where('type', 'seller')->first();
+
+        $user = User::where('username', $username)->where('type', 'seller')->select('id')->first();
         if ($user) {
             $settings = UserSetting::where('user_id', $user->id)->first();
             $showCoupon = $settings->show_coupon ?? 0;
