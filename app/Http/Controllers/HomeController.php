@@ -23,17 +23,17 @@ class HomeController extends Controller
         $seller = User::where('username', $username)->select('id')->first();
 
         $limit = 12;
+        $featuredProducts = Product::where('stocks', '>', 0)->where('status', 1)
+                            ->inRandomOrder()->limit($limit)->get();
 
         if ($seller) {
             $featured = FeaturedProduct::where('user_id', $seller->id)->get();
-            if (count($featured) == 0) {
-                $featuredProducts = Product::inRandomOrder()->limit($limit)->get();
-            } else {
+            if (count($featured) > 0) {
                 $ids = $featured->pluck('product_id');
-                $featuredProducts = Product::whereIn('id', $ids)->inRandomOrder()->limit($limit)->get();
+                $featuredProducts = Product::whereIn('id', $ids)
+                                    ->where('stocks', '>', 0)->where('status', 1)
+                                    ->inRandomOrder()->limit($limit)->get();
             }
-        } else {
-            $featuredProducts = Product::inRandomOrder()->limit($limit)->get();
         }
 
         return view('home', compact('featuredProducts'));

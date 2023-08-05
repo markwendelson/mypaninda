@@ -175,9 +175,9 @@ class CartController extends Controller
 
     public function featured(Request $request)
     {
-        $featured = FeaturedProduct::updateOrCreate(
+        $featured = FeaturedProduct::firstOrCreate(
             ['product_id' => $request->product_id, 'user_id' => $request->user()->id],
-            ['status' => 1]
+            ['product_id' => $request->product_id, 'user_id' => $request->user()->id]
         );
 
         return $featured;
