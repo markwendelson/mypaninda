@@ -14,6 +14,7 @@ use App\Models\Settings;
 use App\Models\Seller;
 use App\Models\User;
 use App\Models\Product;
+use App\Rules\ProductStockRule;
 
 class CheckoutController extends Controller
 {
@@ -47,13 +48,16 @@ class CheckoutController extends Controller
 
     public function process(Request $request)
     {
-        // add ProductQuantityRule for validation
-        // proceed only when stocks are clear
         // get cart session
         $cart = $request->session()->get('cart', []);
         if (count($cart) <= 0) {
             return redirect()->route('cart');
         }
+
+        // validate product stocks
+        // $request->validate([
+        //     'products' => new ProductStockRule()
+        // ]);
 
         // get settings sa db or config env
         $rates = Settings::firstWhere('id', '>', 0);
