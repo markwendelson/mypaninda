@@ -61,7 +61,7 @@ class CheckoutController extends Controller
         $ascRate = $rates->affiliate_commission ?? 0.10;
         $sscRate = $rates->sponsor_commission ?? 0.05;
 
-        // use collections here; temp loop
+        // compute total, use collections
         $subtotal = 0;
         $totalSF = 0;
         $discount = $request->session()->get('discount', 0);
@@ -93,8 +93,7 @@ class CheckoutController extends Controller
         $affiliate = User::where('username', $username)->where('type', 'seller')->select('id')->first();
         $affiliateId = $affiliate->id ?? 0;
 
-        // iterate cart items
-        foreach ($cart as $item) {
+        foreach ($cart as $id => $item) {
             $sponsor = Seller::where('user_id', $item['item']['user_id'])->select('sponsor_id')->first();
             $sponsorId = $sponsor->sponsor_id ?? 0;
 
@@ -105,16 +104,15 @@ class CheckoutController extends Controller
             $vat = round($sellerCharge * $vatRate);
             $transactionFee = $sellerCharge - $vat;
 
-            // credit only if available 
-			// HINDI DAPAT MAGKAROON NG AFFILIATE COMMISH IF SARILI NIYANG PRODUCT
-            $affiliateSalesCommission = 0; // 
+            // credit only if affiliator is valid
+            $affiliateSalesCommission = 0;
             if ($affiliateId != 0) {
                 if ($affiliateId != $item['item']['user_id']) {
                     $affiliateSalesCommission = round($transactionFee * $ascRate, 2);
                 }
             }
 
-            // credit only if available
+            // credit only if sponsor of seller (product) is available
             $sponsorSalesCommission = ($sponsorId > 0) ? round($transactionFee * $sscRate, 2) : 0;
 
             $companyNet = $transactionFee - ($affiliateSalesCommission + $sponsorSalesCommission);
@@ -123,7 +121,7 @@ class CheckoutController extends Controller
             $orderItem = new OrderItem;
             $orderItem->order_id = $order->id;
             $orderItem->reference_number = (string) Str::uuid();
-            $orderItem->product_id = $item['item']['id'];
+            $orderItem->product_id = $id;
             $orderItem->title = $item['item']['title'];
             $orderItem->price = $item['item']['price'];
             $orderItem->quantity = $item['quantity'];
@@ -142,6 +140,9 @@ class CheckoutController extends Controller
             $orderItem->company_net = $companyNet;
             $orderItem->status = 'pending';
             $orderItem->save();
+
+            // decrement product stocks
+            Product::find($id)->decrement('stocks', $item['quantity']);
         }
 
         // store shipping address
