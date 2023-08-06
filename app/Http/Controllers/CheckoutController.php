@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Http\Requests\CheckoutRequest;
 
 use App\Models\Address;
 use App\Models\Order;
@@ -14,7 +15,6 @@ use App\Models\Settings;
 use App\Models\Seller;
 use App\Models\User;
 use App\Models\Product;
-use App\Rules\ProductStockRule;
 
 class CheckoutController extends Controller
 {
@@ -46,18 +46,13 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function process(Request $request)
+    public function process(CheckoutRequest $request)
     {
         // get cart session
         $cart = $request->session()->get('cart', []);
         if (count($cart) <= 0) {
             return redirect()->route('cart');
         }
-
-        // validate product stocks
-        // $request->validate([
-        //     'products' => new ProductStockRule()
-        // ]);
 
         // get settings sa db or config env
         $rates = Settings::firstWhere('id', '>', 0);

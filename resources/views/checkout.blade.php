@@ -17,6 +17,7 @@
             </div>
 
             <div class="container pb-5 mb-sm-4 mt-n2 mt-md-n3">
+            @include('partials.message')
                 <form method="post" action="{{ route('checkout.process') }}">
                 @csrf
                 <div class="row pt-4 mt-2">
@@ -106,35 +107,6 @@
                         </div>
 
                         <h6 class="mb-3 pt-4 pb-3 border-bottom">Orders</h6>
-                        {{--
-                        @foreach ($cart as $item)
-                            <div class="d-sm-flex justify-content-between mb-4 pb-4 border-bottom">
-                                <div class="media d-block d-sm-flex text-center text-sm-left">
-                                    <a class="cart-item-thumb mx-auto mr-sm-4" href="#">
-                                    @if (str_contains(get_headers(env('APP_PRODUCTS_URL') . $item['item']['image'])[0], '200'))
-                                        <img src="{{ asset(env('APP_PRODUCTS_URL') . $item['item']['image']) }}" alt="{{ Str::title($item['item']['itle']) }}">
-                                    @else
-                                        <img src="{{ asset('img/noimage.png') }}" alt="{{ Str::title($item['item']['title']) }}">
-                                    @endif
-                                    </a>
-                                    <div class="media-body pt-3">
-                                    <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="{{ route('item', $item['item']['id']) }}">{{ $item['item']['title'] }}</a></h3>
-                                    <div class="font-size-sm"><span class="text-muted mr-2">Price:</span>{{ number_format($item['item']['price'], 2) }}</div>
-                                    <div class="font-size-sm"><span class="text-muted mr-2">Shipping Fee:</span>{{ number_format($item['item']['shipping_fee'], 2) }}</div>
-                                    </div>
-                                </div>
-                                <div class="pt-2 pt-sm-3 pl-sm-3 mx-auto mx-sm-0 text-center">
-                                    <div class="text-muted mb-sm-2">Quantity:</div>
-                                    <div class="font-weight-semibold">{{ $item['quantity'] }}</div>
-                                </div>
-                                <div class="pt-2 pt-sm-3 pl-sm-3 mx-auto mx-sm-0 text-center">
-                                    <div class="text-muted mb-sm-2">Subtotal:</div>
-                                    <div class="font-weight-semibold">Php {{ number_format(($item['item']['price'] + $item['item']['shipping_fee']) * $item['quantity'], 2) }}</div>
-                                </div>
-                            </div>
-                        @endforeach
-                        --}}
-
                         @foreach ($cart as $id => $item)
                         <div id="item-{{ $id }}" class="d-sm-flex justify-content-between my-4 pb-4 border-bottom">
                             <div class="media d-block d-sm-flex text-center text-sm-left">

@@ -25,17 +25,18 @@ class ProductStockRule implements InvokableRule
         $DBProducts = Product::find(array_keys($products))->keyBy('id');
         $errorText = '';
 
-        foreach($products as $id => $quantity) {
+        foreach($products as $id => $product) {
             // check stocks
             $stocks = $DBProducts[$id]['stocks'];
+            $title = $product['item']['title'];
 
-            if ($stocks < $quantity) {
-                $errorText .= 'Sorry, we only have ' .$stocks . ' left in stock.';
+            if ($stocks < $product['quantity']) {
+                $errorText .= $stocks . ' ' .$title .', ';
             }
         }
 
         if ($errorText != '') {
-            $fail($errorText);
+            $fail('We only have ' .$errorText . ' left in stock.');
         }
     }
 }
