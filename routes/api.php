@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// for demo purposes only use POST
+Route::get('/webhook/payments', [App\Http\Controllers\WebhookController::class, 'payment']);
