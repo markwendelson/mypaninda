@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -34,7 +35,13 @@ class OrderController extends Controller
             $order->save();
 
             // update order items
-            DB::table('order_items')->where('order_id', $id)->update(['status' => 'cancelled']);
+            OrderItem::where('order_id', $id)->update(['status' => 'cancelled']);
+
+            // restore product stocks
+            $items = OrderItem::where('order_id', $id)->select('id', 'order_id', 'product_id', 'quantity')->get();
+            foreach ($items as $item) {
+                Product::find($item->product_id)->increment('stocks', $item->quantity);
+            }
 
             return redirect()->route('orders.show', ['id' => $order])
                 ->with('message', 'Your order has been cancelled.');

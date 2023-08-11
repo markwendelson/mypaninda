@@ -18,6 +18,7 @@ class WebhookController extends Controller
         $paymentCode = $request->payment_code;
         $status = $request->status;
 
+        //whereNotIn applicable status
         $order = Order::where('id', $id)
             ->where('payment_code', $paymentCode)
             ->where('status', 'pending')
@@ -25,8 +26,9 @@ class WebhookController extends Controller
         $order->status = strtolower($status);
         $order->save();
 
-        // if status is expired, cancelled then restore stocks
-        if (in_array($status, ['expired', 'cancelled'])) {
+        // if status is expired, say unpaid within 24hours
+        if ($status == 'expired') {
+            OrderItem::where('order_id', $id)->update(['status' => 'expired']);
             $items = OrderItem::where('order_id', $id)->select('id', 'order_id', 'product_id', 'quantity')->get();
             foreach ($items as $item) {
                 Product::find($item->product_id)->increment('stocks', $item->quantity);
