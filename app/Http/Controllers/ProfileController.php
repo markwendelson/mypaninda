@@ -36,14 +36,14 @@ class ProfileController extends Controller
     public function password()
     {
         $user = Auth::user();
-        
+
         return view('profile.password', compact('user'));
     }
 
     public function reset(ResetPasswordRequest $request)
     {
         $user = User::findOrFail($request->user()->id);
-        
+
         if (!Hash::check($request->old_password, $user->password)) {
             return redirect()->route('profiles.password')->withErrors('Your old password do not match on your account.');
         }
@@ -60,7 +60,7 @@ class ProfileController extends Controller
         $history = Seller::where('user_id', Auth::id())->where('status', '!=', 'voided')->latest()->get();
 
         return view('profile.upgrade', [
-            'history' => $history, 
+            'history' => $history,
             'sponsors' => $sponsors,
         ]);
     }
@@ -77,7 +77,7 @@ class ProfileController extends Controller
         $seller->commission = $rates->sponsor_reward ?? 100;
         $seller->status = 'pending';
         $seller->save();
-    
+
         // business logic. move this to a service class
         if ($request->hasFile('payment')) {
             if ($request->file('payment')->isValid()) {

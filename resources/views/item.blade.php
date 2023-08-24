@@ -40,7 +40,7 @@
                                             </div>
                                             @endif -->
                                         </div>
-                                        
+
                                         <!-- <div class="nav d-flex justify-content-between">
                                             <a class="nav-item nav-link active" data-toggle="tab" href="#sg1"><img src="{{ asset(env('APP_PRODUCTS_URL') . $product->image) }}" alt=""></a>
 
@@ -89,7 +89,7 @@
                                 </div>
 
                                 <h2 class="h6">Recommendations</h2>
-                                <div class="row col-md-12">
+                                {{-- <div class="row col-md-12">
                                     @foreach ($recommendations as $item)
                                     <div class="col-md-3 col-sm-6">
                                         <div class="product-card mb-4">
@@ -113,6 +113,35 @@
                                         </div>
                                     </div>
                                     @endforeach
+                                </div> --}}
+                                <div class="container row">
+                                    <div class="col-12">
+                                        <div class="bg-secondary bg-size-cover mb-grid-gutter" style="background-image: url({{ asset('img/home/banner/bg.jpg') }});">
+                                            <div class="owl-carousel trigger-carousel " data-owl-carousel="{ &quot;nav&quot;: true,&quot;slideBy&quot;: 4, &quot;dots&quot;: true, &quot;items&quot;: 4,&quot;loop&quot;: true, &quot;autoHeight&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 3000 }">
+                                            @foreach ($recommendations as $item)
+                                                <div class="product-card mb-4" id="{{$item->id}}"   >
+                                                    <div class="product-thumb">
+                                                        <a class="product-thumb-link" href="{{ route('item', $item->id) }}"></a>
+                                                        @if (file_exists(env('APP_PRODUCTS_URL') . $item->image))
+                                                        <img src="{{ asset(env('APP_PRODUCTS_URL') . $item->image) }}" alt="{{ Str::title($item->title) }}">
+                                                        @else
+                                                        <img src="{{ asset('img/noimage.png') }}" alt="{{ Str::title($item->title) }}">
+                                                        @endif
+                                                    </div>
+                                                    <div class="product-card-body text-center"><a class="product-meta" href="#">Men's jeans</a>
+                                                        <h3 class="product-card-title">
+                                                            <a href="{{ route('item', $item->id) }}">{{ $item->title }}</a>
+                                                        </h3>
+                                                        <span class="text-primary">Php {{ $item->price }}</span>
+                                                    </div>
+                                                    <div class="product-card-body">
+                                                        <button class="btn btn-primary btn-sm btn-block btn-cart-add" type="button" data-id="{{ $item->id }}">Add to cart</button>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -157,7 +186,7 @@
 @endsection
 
 @push('scripts')
-    <script src="/js/owl.carousel.min.js"></script>
+    <!-- <script src="/js/owl.carousel.min.js"></script> -->
     <script src="/js/cart.js"></script>
     <script>
     $(".sim-slider").owlCarousel({

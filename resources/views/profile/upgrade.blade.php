@@ -29,14 +29,14 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="payment">Proof of Upgrade Payment (Photo)</label>
-                <input type="file" id="payment" name="payment" class="form-control" 
+                <input type="file" id="payment" name="payment" class="form-control"
                     value=""  accept="image/*">
             </div>
         </div>
         <!-- <div class="col-md-6">
             <div class="form-group">
                 <label for="payment">Proof of Identity (Government ID) *</label>
-                <input type="file" id="payment" name="payment" class="form-control" 
+                <input type="file" id="payment" name="payment" class="form-control"
                     value=""  accept="image/*" required>
             </div>
         </div> -->
@@ -63,7 +63,7 @@
             @foreach($history as $item)
                 <tr>
                     <td>{{ $item->created_at }}</td>
-                    <td>{{ Str::title($item->sponsor->name) }}</td>
+                    <td>{{ Str::title($item->sponsor?->name ) }}</td>
                     <td>{{ $item->notes }}</td>
                     <td>{{ Str::title($item->status) }}</td>
                 </tr>
