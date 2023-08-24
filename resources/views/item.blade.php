@@ -75,6 +75,8 @@
                                                 <p>Shipping Fee : <span><i>Php {{ number_format($product->shipping_fee, 2) }}</span></i></p>
                                                 <p>Condition : <span><i>{{ Str::title($product->condition) }}</span></i></p>
                                                 <p>Stocks : <span><i>{{ $product->stocks }}</span></i></p>
+                                                {!! $product->description !!}
+
                                             </div>
                                             <div class="colo-siz">
                                                 <div class="pro-btns">
@@ -84,11 +86,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                {{ $product->description }}
-                                </div>
+                                <div class="col-md-12 mb-3 mt-3"></div>
 
-                                <h2 class="h6">Recommendations</h2>
+
                                 {{-- <div class="row col-md-12">
                                     @foreach ($recommendations as $item)
                                     <div class="col-md-3 col-sm-6">
@@ -116,6 +116,7 @@
                                 </div> --}}
                                 <div class="container row">
                                     <div class="col-12">
+                                        <h2 class="h6">Recommendations</h2>
                                         <div class="bg-secondary bg-size-cover mb-grid-gutter" style="background-image: url({{ asset('img/home/banner/bg.jpg') }});">
                                             <div class="owl-carousel trigger-carousel " data-owl-carousel="{ &quot;nav&quot;: true,&quot;slideBy&quot;: 4, &quot;dots&quot;: true, &quot;items&quot;: 4,&quot;loop&quot;: true, &quot;autoHeight&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 3000 }">
                                             @foreach ($recommendations as $item)
