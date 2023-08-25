@@ -118,7 +118,7 @@
                                     <div class="col-12">
                                         <h2 class="h6">Recommendations</h2>
                                         <div class="bg-secondary bg-size-cover mb-grid-gutter" style="background-image: url({{ asset('img/home/banner/bg.jpg') }});">
-                                            <div class="owl-carousel trigger-carousel " data-owl-carousel="{ &quot;nav&quot;: true,&quot;slideBy&quot;: 4, &quot;dots&quot;: true, &quot;items&quot;: 4,&quot;loop&quot;: true, &quot;autoHeight&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 3000 }">
+                                            <div class="owl-carousel trigger-carousel " >
                                             @foreach ($recommendations as $item)
                                                 <div class="product-card mb-4" id="{{$item->id}}"   >
                                                     <div class="product-thumb">
@@ -190,13 +190,14 @@
     <!-- <script src="/js/owl.carousel.min.js"></script> -->
     <script src="/js/cart.js"></script>
     <script>
-    $(".sim-slider").owlCarousel({
-		autoplay:false,
-    	autoplayHoverPause:true,
+    $(".trigger-carousel").owlCarousel({
+		autoplay:true,
+		autoplayTimeout:3000,
     	smartSpeed:500,
 		loop: true,
 		responsiveClass: true,
 		items : 4,
+        slideBy:4,
 		nav : true,
 		navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
 		margin: 25,
@@ -209,7 +210,7 @@
 				items: 2
 			},
 			768: {
-				items: 3
+				items: 2
 			},
 			992: {
 				items: 4
