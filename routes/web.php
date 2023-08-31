@@ -55,6 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::get('profiles/password', [App\Http\Controllers\ProfileController::class, 'password'])->name('profiles.password');
     Route::post('profiles/password', [App\Http\Controllers\ProfileController::class, 'reset'])->name('profiles.reset');
 
-    Route::get('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'upgrade'])->name('profiles.upgrade');
-    Route::post('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'requestUpgrade'])->name('profiles.request-upgrade');
+    Route::get('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'upgrade'])->name('profiles.upgrade')->middleware('verified');
+    Route::post('profiles/upgrade', [App\Http\Controllers\ProfileController::class, 'requestUpgrade'])->name('profiles.request-upgrade')->middleware('verified');
 });
